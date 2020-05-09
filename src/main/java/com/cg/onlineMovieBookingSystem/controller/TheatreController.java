@@ -95,7 +95,36 @@ public class TheatreController {
 		return theatreService.findScreensInTheatre(theatreId);
 	}
 	
-	
+		@GetMapping("/getByTheatre/{theatreName}")
+	public List<Movie> searchMovieByTheater(@PathVariable(value="theatreName") String theatreName){
+		return  theatreService.searchMovieByTheater(theatreName);
+
+	}
+
+	@GetMapping("/getAll")
+	public List<Theatre> getAll(){
+
+		return (List<Theatre>) theaterRepository.findAll();
+	}
+
+	@GetMapping("/getByCity/{theatreCity}")
+	public List<Movie> searchMovierByCity(@PathVariable(value="theatreCity") String theatreCity)
+	{
+		return  theatreService.searchTheaterByMovie(theatreCity);
+
+
+	}
+
+	@GetMapping("allCities")
+	public List<String> getAllCities(){
+		return  theaterRepository.findAllCities();
+	}
+
+	@GetMapping("allTheatres")
+	public List<String> getAllTheatre()
+	{
+		return theaterRepository.findAllTheatres();
+	}
 	@GetMapping("/getScreen/{theatre}/{screen}")
 	public Screen selectScreen(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId){
 		return theatreService.selectScreen(theatreId, screenId);
