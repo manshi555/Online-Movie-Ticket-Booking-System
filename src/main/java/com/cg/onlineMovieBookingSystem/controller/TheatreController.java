@@ -69,7 +69,36 @@ public class TheatreController {
 	public List<Theatre> selectByMovieName(@RequestBody String movieName){
 		return theatreService.selectByMovieName(movieName);
 	}
+	 @GetMapping("/getByTheatre/{theatreName}")
+	public List<Movie> searchMovieByTheater(@PathVariable(value="theatreName") String theatreName){
+	return  theatreService.searchMovieByTheater(theatreName);
 	
+}
+
+	@GetMapping("/getAll")
+	public List<Theatre> getAll(){
+
+		return (List<Theatre>) theaterRepository.findAll();
+	}
+
+	@GetMapping("/getByCity/{theatreCity}")
+	public List<Movie> searchMovierByCity(@PathVariable(value="theatreCity") String theatreCity)
+	{
+		return  theatreService.searchTheaterByMovie(theatreCity);
+
+
+	}
+
+	@GetMapping("allCities")
+	public List<String> getAllCities(){
+		return  theaterRepository.findAllCities();
+	}
+
+	@GetMapping("allTheatres")
+	public List<String> getAllTheatre()
+	{
+		return theaterRepository.findAllTheatres();
+	}
 	@GetMapping("/selectByMovieAndTheatre")
 	public List<Show> selectByMovieAndTheatre(@RequestParam("movieName") String movieName, @RequestParam("theatreName") String theatreName){
 		return theatreService.selectByMovieAndTheatre(movieName, theatreName);
